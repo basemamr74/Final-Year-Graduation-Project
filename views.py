@@ -9,6 +9,6 @@ def search_article(request):
         query = request.POST.get('title', None)
         if query:
             results = Product.objects.filter(title__contains=query)
-            return render(request, 'article-search.html', {"results":results})
+            return render(request, 'article-search.html', {'results':results})
 
     return render(request, 'article-search.html')
