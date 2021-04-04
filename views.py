@@ -5,10 +5,11 @@ from .models import articles
 
 def search_article(request):
     """ search function  """
-    if request.method == "POST":
-        query = request.POST.get('title', None)
+    if request.method == "GET":
+        query = request.GET.get('title','content', None)
+         submitbutton= request.GET.get('submit')
         if query:
-            results = Product.objects.filter(title__contains=query)
-            return render(request, 'article-search.html', {'results':results})
+            results = Product.objects.filter(title__icontains=query).distinct | (content__icontains=query).distinct()
+            return render(request, 'article-search.html', {'results':results,'submitbutton': submitbutton})
 
     return render(request, 'article-search.html')
