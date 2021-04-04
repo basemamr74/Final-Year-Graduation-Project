@@ -7,9 +7,9 @@
 
 
 
-<form action="{% url 'search:search_article' %}" method="POST">
+<form action="{% url 'search:search_article' %}" method="GET">
     {% csrf_token %} 
-    <input type="text" name="title">
+    <input type="text" name="title","content">
     <input type="submit" name="submit" value="Search">
 </form>
 
@@ -18,6 +18,10 @@
 {% for result in results %}
 
     <p>{result.title}}</p>
+    </br>
+    
+    <p>{result.content}</p>
+    </br>
 
 {% endfor %}
 
